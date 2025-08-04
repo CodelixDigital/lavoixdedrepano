@@ -1,7 +1,11 @@
+'use client';
+
 import Link from 'next/link';
 import { Heart, Mail, Phone, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Footer() {
+  const { t } = useLanguage();
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container-max section-padding">
@@ -13,10 +17,12 @@ export default function Footer() {
               <span className="text-lg font-semibold">La Voix des Drépano</span>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
-              Accompagner et soutenir les enfants atteints de drépanocytose en République Démocratique du Congo pour leur offrir un avenir meilleur.
+              {t('footer.description')}
             </p>
             <div className="flex space-x-4">
-              <Facebook className="h-5 w-5 text-gray-400 hover:text-blue-500 cursor-pointer transition-colors" />
+              <a href="https://www.facebook.com/share/19mL6KmMMn/" target="_blank" rel="noopener noreferrer">
+                <Facebook className="h-5 w-5 text-gray-400 hover:text-blue-500 cursor-pointer transition-colors" />
+              </a>
               <Instagram className="h-5 w-5 text-gray-400 hover:text-pink-500 cursor-pointer transition-colors" />
               <Youtube className="h-5 w-5 text-gray-400 hover:text-red-500 cursor-pointer transition-colors" />
             </div>
@@ -24,29 +30,29 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Liens rapides</h3>
+            <h3 className="text-lg font-semibold">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2">
-              <li><Link href="/a-propos" className="text-gray-300 hover:text-white text-sm transition-colors">À propos</Link></li>
-              <li><Link href="/nos-actions" className="text-gray-300 hover:text-white text-sm transition-colors">Nos actions</Link></li>
-              <li><Link href="/drepanocytose" className="text-gray-300 hover:text-white text-sm transition-colors">La drépanocytose</Link></li>
-              <li><Link href="/temoignages" className="text-gray-300 hover:text-white text-sm transition-colors">Témoignages</Link></li>
+              <li><Link href="/a-propos" className="text-gray-300 hover:text-white text-sm transition-colors">{t('nav.about')}</Link></li>
+              <li><Link href="/nos-actions" className="text-gray-300 hover:text-white text-sm transition-colors">{t('nav.actions')}</Link></li>
+              <li><Link href="/drepanocytose" className="text-gray-300 hover:text-white text-sm transition-colors">{t('nav.sickleCell')}</Link></li>
+              <li><Link href="/temoignages" className="text-gray-300 hover:text-white text-sm transition-colors">{t('nav.testimonials')}</Link></li>
             </ul>
           </div>
 
           {/* Support */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Soutenir</h3>
+            <h3 className="text-lg font-semibold">{t('footer.support')}</h3>
             <ul className="space-y-2">
-              <li><Link href="/don" className="text-gray-300 hover:text-white text-sm transition-colors">Faire un don</Link></li>
+              <li><Link href="/don" className="text-gray-300 hover:text-white text-sm transition-colors">{t('nav.donate')}</Link></li>
               <li><Link href="/contact" className="text-gray-300 hover:text-white text-sm transition-colors">Devenir bénévole</Link></li>
-              <li><Link href="/actualites" className="text-gray-300 hover:text-white text-sm transition-colors">Actualités</Link></li>
+              <li><Link href="/actualites" className="text-gray-300 hover:text-white text-sm transition-colors">{t('nav.news')}</Link></li>
               <li><Link href="/contact" className="text-gray-300 hover:text-white text-sm transition-colors">Partenariats</Link></li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Contact</h3>
+            <h3 className="text-lg font-semibold">{t('footer.contact')}</h3>
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-red-600" />
@@ -54,7 +60,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-red-600" />
-                <span className="text-gray-300 text-sm">+243 xxx xxx xxx</span>
+                <span className="text-gray-300 text-sm">+243 810 602 540</span>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-red-600" />
@@ -66,7 +72,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2025 La Voix des Drépano. Tous droits réservés. | Fait avec ❤️ pour les enfants drépanocytaires
+            {t('footer.copyright')}
           </p>
         </div>
       </div>

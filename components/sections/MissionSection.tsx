@@ -1,39 +1,42 @@
-import { Heart, Users, Stethoscope, GraduationCap } from 'lucide-react';
+'use client';
 
-const missions = [
-  {
-    icon: Stethoscope,
-    title: 'Soins médicaux',
-    description: 'Accès aux traitements et suivi médical spécialisé pour les enfants drépanocytaires.',
-  },
-  {
-    icon: GraduationCap,
-    title: 'Soutien scolaire',
-    description: 'Accompagnement éducatif pour permettre aux enfants de poursuivre leur scolarité.',
-  },
-  {
-    icon: Users,
-    title: 'Soutien familial',
-    description: 'Aide et formation aux familles pour mieux comprendre et gérer la maladie.',
-  },
-  {
-    icon: Heart,
-    title: 'Soutien psychologique',
-    description: 'Accompagnement émotionnel et social pour les enfants et leurs proches.',
-  },
-];
+import { Heart, Users, Stethoscope, GraduationCap } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function MissionSection() {
+  const { t } = useLanguage();
+  
+  const missions = [
+    {
+      icon: Stethoscope,
+      title: t('actions.medical.title'),
+      description: t('actions.medical.description'),
+    },
+    {
+      icon: GraduationCap,
+      title: t('actions.education.title'),
+      description: t('actions.education.description'),
+    },
+    {
+      icon: Users,
+      title: t('actions.family.title'),
+      description: t('actions.family.description'),
+    },
+    {
+      icon: Heart,
+      title: t('actions.psychological.title'),
+      description: t('actions.psychological.description'),
+    },
+  ];
   return (
     <section className="section-padding bg-white">
       <div className="container-max">
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-            Notre mission humanitaire
+            {t('common.mission')}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Nous œuvrons chaque jour pour améliorer la qualité de vie des enfants drépanocytaires 
-            et de leurs familles à travers des actions concrètes et durables.
+            {t('hero.subtitle')}
           </p>
         </div>
 

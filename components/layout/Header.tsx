@@ -3,25 +3,28 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, Heart } from 'lucide-react';
-
-const navigation = [
-  { name: 'Accueil', href: '/' },
-  { name: 'À propos', href: '/a-propos' },
-  { name: 'Nos actions', href: '/nos-actions' },
-  { name: 'La drépanocytose', href: '/drepanocytose' },
-  { name: 'Témoignages', href: '/temoignages' },
-  { name: 'Actualités', href: '/actualites' },
-  { name: 'Contact', href: '/contact' },
-];
+import { useLanguage } from '@/contexts/LanguageContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 export default function Header() {
+  const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  const navigation = [
+    { name: t('nav.home'), href: '/' },
+    { name: t('nav.about'), href: '/a-propos' },
+    { name: t('nav.actions'), href: '/nos-actions' },
+    { name: t('nav.sickleCell'), href: '/drepanocytose' },
+    { name: t('nav.testimonials'), href: '/temoignages' },
+    { name: t('nav.news'), href: '/actualites' },
+    { name: t('nav.contact'), href: '/contact' },
+  ];
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
       <nav className="container-max flex items-center justify-between py-4 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center space-x-3">
-          <Heart className="h-8 w-8 text-red-600" />
+          <img src="/logo.jpg" alt="La Voix des Drépano" className="h-8 w-8 object-cover rounded" />
           <Link href="/" className="text-xl font-bold text-gray-900">
             La Voix des Drépano
           </Link>
@@ -40,10 +43,11 @@ export default function Header() {
           ))}
         </div>
 
-        {/* Donation Button */}
-        <div className="hidden lg:flex">
+        {/* Donation Button and Language Switcher */}
+        <div className="hidden lg:flex items-center space-x-4">
+          <LanguageSwitcher />
           <Link href="/don" className="btn-primary">
-            Faire un don
+            {t('nav.donate')}
           </Link>
         </div>
 
@@ -77,13 +81,16 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            <Link
-              href="/don"
-              className="block btn-primary text-center mt-4"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Faire un don
-            </Link>
+            <div className="flex items-center justify-center space-x-4 mt-4">
+              <LanguageSwitcher />
+              <Link
+                href="/don"
+                className="btn-primary"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t('nav.donate')}
+              </Link>
+            </div>
           </div>
         </div>
       )}

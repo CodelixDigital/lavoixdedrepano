@@ -1,50 +1,73 @@
+'use client';
+
 import { Heart, Users, Target, Award } from 'lucide-react';
-
-const values = [
-  {
-    icon: Heart,
-    title: 'Compassion',
-    description: 'Nous agissons avec empathie et bienveillance envers chaque enfant et famille que nous accompagnons.',
-  },
-  {
-    icon: Users,
-    title: 'Solidarité',
-    description: 'Nous croyons en la force du collectif pour surmonter les défis de la drépanocytose.',
-  },
-  {
-    icon: Target,
-    title: 'Engagement',
-    description: 'Nous nous engageons durablement auprès des communautés pour un impact réel et mesurable.',
-  },
-  {
-    icon: Award,
-    title: 'Excellence',
-    description: 'Nous visons l\'excellence dans nos services et notre accompagnement médico-social.',
-  },
-];
-
-const team = [
-  {
-    name: 'Dr. Marie Kabongo',
-    role: 'Directrice médicale',
-    image: 'https://images.pexels.com/photos/5327580/pexels-photo-5327580.jpeg?auto=compress&cs=tinysrgb&w=400',
-    bio: 'Spécialiste en hématologie pédiatrique avec 20 ans d\'expérience.',
-  },
-  {
-    name: 'Jean-Pierre Mukendi',
-    role: 'Coordinateur terrain',
-    image: 'https://images.pexels.com/photos/8090033/pexels-photo-8090033.jpeg?auto=compress&cs=tinysrgb&w=400',
-    bio: 'Responsable des programmes communautaires et de sensibilisation.',
-  },
-  {
-    name: 'Sarah Mbuyi',
-    role: 'Psychologue',
-    image: 'https://images.pexels.com/photos/7551462/pexels-photo-7551462.jpeg?auto=compress&cs=tinysrgb&w=400',
-    bio: 'Spécialisée dans l\'accompagnement psychologique des enfants malades.',
-  },
-];
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function AboutPage() {
+  const { t, language } = useLanguage();
+  
+  const values = [
+    {
+      icon: Heart,
+      title: t('about.values.compassion.title'),
+      description: t('about.values.compassion.description'),
+    },
+    {
+      icon: Users,
+      title: t('about.values.solidarity.title'),
+      description: t('about.values.solidarity.description'),
+    },
+    {
+      icon: Target,
+      title: t('about.values.commitment.title'),
+      description: t('about.values.commitment.description'),
+    },
+    {
+      icon: Award,
+      title: t('about.values.excellence.title'),
+      description: t('about.values.excellence.description'),
+    },
+  ];
+
+  const team = [
+    {
+      name: 'Madame Keyt Ngwanza',
+      role: {
+        fr: 'Fondatrice',
+        en: 'Founder',
+      },
+      image: '/team/presidente_keyt_ngwanza.jpeg',
+      bio: {
+        fr: 'Fondatrice de La Voix des Drépano, dédiée à l\'amélioration de la vie des enfants drépanocytaires.',
+        en: 'Founder of La Voix des Drépano, dedicated to improving the lives of children with sickle cell disease.',
+      },
+    },
+    {
+      name: 'Noel Mulobo',
+      role: {
+        fr: 'Coordinateur terrain',
+        en: 'Field Coordinator',
+      },
+      image: '/team/coordinateur_noel_mulobo.jpeg',
+      bio: {
+        fr: 'Responsable des programmes communautaires et de sensibilisation sur le terrain.',
+        en: 'Responsible for community programs and field awareness.',
+      },
+    },
+    {
+      name: 'À venir',
+      role: {
+        fr: 'Psychologue',
+        en: 'Psychologist',
+      },
+      image: 'https://images.pexels.com/photos/7551462/pexels-photo-7551462.jpeg?auto=compress&cs=tinysrgb&w=400',
+      bio: {
+        fr: 'Spécialisée dans l\'accompagnement psychologique des enfants malades et leurs familles.',
+        en: 'Specialized in psychological support for sick children and their families.',
+      },
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -53,18 +76,17 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h1 className="text-4xl sm:text-5xl font-bold text-gray-900">
-                À propos de La Voix des Drépano
+                {t('about.title')}
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed">
-                Depuis 2010, nous sommes une organisation humanitaire dédiée à l'amélioration 
-                de la qualité de vie des enfants atteints de drépanocytose en République Démocratique du Congo.
+                {t('about.subtitle')}
               </p>
             </div>
-            <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
+            <div className="aspect-video rounded-xl overflow-hidden shadow-lg bg-white flex items-center justify-center p-8">
               <img
-                src="https://images.pexels.com/photos/6999303/pexels-photo-6999303.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Équipe médicale avec des enfants"
-                className="w-full h-full object-cover"
+                src="/logo.jpg"
+                alt="La Voix des Drépano - Logo"
+                className="w-full h-full object-contain"
               />
             </div>
           </div>
@@ -76,25 +98,24 @@ export default function AboutPage() {
         <div className="container-max">
           <div className="max-w-4xl mx-auto space-y-8">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Notre histoire</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">{t('about.story.title')}</h2>
             </div>
             
             <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
               <p>
-                La Voix des Drépano est née de la volonté de Dr. Marie Kabongo et d'un groupe de parents 
-                d'enfants drépanocytaires de créer un réseau de soutien et d'accompagnement adapté aux 
-                réalités congolaises.
+                {t('about.story.p1')}
               </p>
               
               <p>
-                Confrontés au manque d'information, aux difficultés d'accès aux soins spécialisés et 
-                à la stigmatisation sociale, nous avons décidé d'agir pour que chaque enfant atteint 
-                de drépanocytose puisse grandir dans la dignité et l'espoir.
+                {t('about.story.p2')}
               </p>
               
               <p>
-                Aujourd'hui, notre organisation compte plus de 50 bénévoles actifs et a accompagné 
-                plus de 500 enfants et leurs familles à travers tout le territoire congolais.
+                {t('about.story.p3')}
+              </p>
+              
+              <p>
+                {t('about.story.p4')}
               </p>
             </div>
           </div>
@@ -105,9 +126,9 @@ export default function AboutPage() {
       <section className="section-padding bg-gray-50">
         <div className="container-max">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Nos valeurs</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">{t('about.values.title')}</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Les principes qui guident notre action quotidienne au service des enfants drépanocytaires.
+              {t('about.values.subtitle')}
             </p>
           </div>
 
@@ -136,9 +157,9 @@ export default function AboutPage() {
       <section className="section-padding bg-white">
         <div className="container-max">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Notre équipe</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">{t('about.team.title')}</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Des professionnels dévoués qui mettent leur expertise au service des enfants drépanocytaires.
+              {t('about.team.subtitle')}
             </p>
           </div>
 
@@ -157,10 +178,10 @@ export default function AboutPage() {
                     {member.name}
                   </h3>
                   <p className="text-red-600 font-medium">
-                    {member.role}
+                    {member.role[language]}
                   </p>
                   <p className="text-gray-600 text-sm leading-relaxed">
-                    {member.bio}
+                    {member.bio[language]}
                   </p>
                 </div>
               </div>
