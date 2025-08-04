@@ -1,8 +1,6 @@
-'use client';
-
 import Link from 'next/link';
 import { Calendar, ArrowLeft, Tag } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
+import ArticleContent from './ArticleContent';
 
 const allNews = [
   {
@@ -161,89 +159,28 @@ const allNews = [
   },
 ];
 
+// Generate static params for all news articles
+export function generateStaticParams() {
+  return allNews.map((article) => ({
+    id: article.id.toString(),
+  }));
+}
+
 export default function ArticlePage({ params }: { params: { id: string } }) {
-  const { t, language } = useLanguage();
   const article = allNews.find(news => news.id === parseInt(params.id));
 
   if (!article) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('news.articleNotFound')}</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Article non trouvé</h1>
           <Link href="/actualites" className="btn-primary">
-            {t('news.backToNews')}
+            Retour aux actualités
           </Link>
         </div>
       </div>
     );
   }
 
-  return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-red-50 to-blue-50">
-        <div className="container-max">
-          <div className="max-w-4xl mx-auto">
-            <Link 
-              href="/actualites" 
-              className="inline-flex items-center space-x-2 text-red-600 hover:text-red-700 mb-6"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span>{t('news.backToNews')}</span>
-            </Link>
-            
-            <div className="space-y-6">
-              <div className="flex items-center space-x-4">
-                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
-                  {article.category[language]}
-                </span>
-                <div className="flex items-center space-x-2 text-gray-500">
-                  <Calendar className="h-4 w-4" />
-                  <time>{article.date}</time>
-                </div>
-              </div>
-              
-              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight">
-                {article.title[language]}
-              </h1>
-              
-              <p className="text-xl text-gray-600 leading-relaxed">
-                {article.excerpt[language]}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Article Content */}
-      <section className="section-padding bg-white">
-        <div className="container-max">
-          <div className="max-w-4xl mx-auto">
-            <div className="aspect-video rounded-xl overflow-hidden shadow-lg mb-8">
-              <img
-                src={article.image}
-                alt={article.title[language]}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
-            <div className="prose prose-lg max-w-none">
-              <p className="text-lg text-gray-600 leading-relaxed">
-                {article.content[language]}
-              </p>
-            </div>
-            
-            <div className="mt-12 pt-8 border-t border-gray-200">
-              <Link 
-                href="/actualites" 
-                className="btn-outline"
-              >
-                {t('news.backToNews')}
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+  return <ArticleContent article={article} />;
 } 
